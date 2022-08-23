@@ -2,20 +2,16 @@ const game = (() => {
   // doesn't work yet
   const checkWin = (board) => {
     for (let i = 0; i < board.length; i++) {
-      if (board[i][0] == board[i][1] == board[i][2] && board[i][0] != 0) {
-        announceWinner(board[i][0]);
-      } else if (board[0][i] == board[1][i] == board[2][i] && board[0][i] != 0) {
-        announceWinner(board[0][i]);
+      if (board[i][0] == board[i][1] && board[i][1] == board[i][2] && board[i][0] != 0) {
+        return true;
+      } else if (board[0][i] == board[1][i] && board[1][i] == board[2][i] && board[0][i] != 0) {
+        return true;
       } else {
         return false;
       }
     }
   };
-
-  const announceWinner = (mark) => {
-    console.log(`${mark} won.`);
-  }
-  return {checkWin};
+  return {checkWin}
 })();
 
 const gameBoard = (() => {
@@ -29,9 +25,13 @@ const gameBoard = (() => {
     }
   };
 
-  const reset = () => board = [[0, 0, 0], [0, 0, 0], [0, 0, 0]];
-
-  const get = () => board;
+  const reset = () => {
+    for(i = 0; i < 3; i++) {
+      for(x = 0; x < 3; x++) {
+        board[i][x] = 0;
+      }
+    }
+  };
 
   const check = (row, column) => {
     if (board[row][column] == '') {
@@ -41,7 +41,7 @@ const gameBoard = (() => {
     }
   }
 
-  return {change, get, reset, check, board};
+  return {change, reset, check, board}
 })();
 
 const gameController = (() => {
@@ -59,9 +59,17 @@ const gameController = (() => {
     if (gameBoard.check(row, column)){
       gameBoard.change(row, column, currentPlayer);
       displayController.draw(tile, currentPlayer);
+      if (game.checkWin(gameBoard.board) == true) {
+        announceWinner();
+        gameBoard.reset();
+        displayController.clear(tiles);
+      }
       switchPlayer();
-      game.checkWin(gameBoard.board);
     }
+  };
+
+  const announceWinner = () => {
+    console.log(`${currentPlayer} won!`);
   };
 
   const convertId = (id) => {
@@ -101,7 +109,13 @@ const displayController = (() => {
     tile.innerHTML = mark;
   };
 
-  return {draw};
+  const clear = (tiles) => {
+    for (let i = 0; i < tiles.length; i++) {
+      tiles[i].innerHTML = '';
+    }
+  };
+
+  return {draw, clear}
 })();
 
 const Player = (name, mark) => {
