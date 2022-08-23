@@ -1,14 +1,18 @@
 const game = (() => {
-  // doesn't work yet
   const checkWin = (board) => {
     for (let i = 0; i < board.length; i++) {
       if (board[i][0] == board[i][1] && board[i][1] == board[i][2] && board[i][0] != 0) {
         return true;
       } else if (board[0][i] == board[1][i] && board[1][i] == board[2][i] && board[0][i] != 0) {
         return true;
-      } else {
-        return false;
       }
+    }
+    if (board[0][0] == board[1][1] && board[1][1] == board[2][2] && board[0][0] != 0) {
+      return true;
+    } else if (board[0][2] == board[1][1] && board[1][1] == board[2][0] && board[0][2] != 0) {
+      return true;
+    } else {
+      return false;
     }
   };
   return {checkWin}
@@ -47,10 +51,6 @@ const gameBoard = (() => {
 const gameController = (() => {
   let currentPlayer = 'x';
 
-  const tiles = document.getElementsByClassName('tile');
-  for (let i = 0; i < tiles.length; i++) {
-    tiles[i].addEventListener('click', () => changeTile(tiles[i], i));
-  };
 
   const changeTile = (tile, id) => {
     const row = convertId(id)[0];
@@ -61,11 +61,15 @@ const gameController = (() => {
       displayController.draw(tile, currentPlayer);
       if (game.checkWin(gameBoard.board) == true) {
         announceWinner();
-        gameBoard.reset();
-        displayController.clear(tiles);
+        reset();
       }
       switchPlayer();
     }
+  };
+
+  const reset = () => {
+    gameBoard.reset();
+    displayController.clear();
   };
 
   const announceWinner = () => {
@@ -102,14 +106,49 @@ const gameController = (() => {
       currentPlayer = 'x';
     }
   };
+
+  return {changeTile, reset}
 })();
 
 const displayController = (() => {
+  const tiles = document.getElementsByClassName('tile');
+
+  const playerOne = document.getElementById('player-one-name');
+  playerOne.addEventListener('click', () => changeNamePopup('player-one-name-popup'));
+
+  const playerTwo = document.getElementById('player-two-name');
+  playerTwo.addEventListener('click', () => changeNamePopup('player-two-name-popup'));
+
+  document.getElementById('player-one-form').addEventListener('submit', (e) => {
+    const name = document.getElementById('player-one-name-field');
+    newName(e, playerOne, name);
+  });
+
+  document.getElementById('player-two-form').addEventListener('submit', (e) => {
+    const name = document.getElementById('player-two-name-field');
+    newName(e, playerTwo, name);
+  });
+
+  for (let i = 0; i < tiles.length; i++) {
+    tiles[i].addEventListener('click', () => gameController.changeTile(tiles[i], i));
+  };
+
+  const newName = (event, player, name) => {
+    event.preventDefault();
+    if (name.value.length <= 9) {
+      player.innerText = name.value;
+    }
+  };
+
+  const changeNamePopup = (player) => {
+    document.getElementById(player).classList.toggle('hidden');
+  };
+
   const draw = (tile, mark) => {
     tile.innerHTML = mark;
   };
 
-  const clear = (tiles) => {
+  const clear = () => {
     for (let i = 0; i < tiles.length; i++) {
       tiles[i].innerHTML = '';
     }
