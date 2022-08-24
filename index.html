@@ -1,54 +1,66 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Tic Tac Toe</title>
-  <script src="script.js" defer></script>
-  <link rel="stylesheet" href="style.css">
-</head>
-<body>
-  <div class="main">
-    <div class="score">
-      <span id="player-one-score">2</span> : <span id="player-two-score">2</span>
-    </div>
-
-    
-    <div class="player">
-      <div id="player-one-name" class="player-name">Name 1</div>
-      <div id="player-one-name-popup" class="player-popup">
-        <form id="player-one-form">
-          <input type="text" name="player-one-name-field" id="player-one-name-field" size="10">
-          <input type="submit" value="Save">
-        </form>
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Tic Tac Toe</title>
+    <script src="script.js" defer></script>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div class="main">
+      <div class="score">
+        <span id="player-one-score">0</span> :
+        <span id="player-two-score">0</span>
       </div>
-      <div class="mark">X</div>
-    </div>
 
-    <div class="inner-main">
-      <div class="tile"></div>
-      <div class="tile"></div>
-      <div class="tile"></div>
-      <div class="tile"></div>
-      <div class="tile"></div>
-      <div class="tile"></div>
-      <div class="tile"></div>
-      <div class="tile"></div>
-      <div class="tile"></div>
-    </div>
-
-    <div class="player">
-      <div id="player-two-name" class="player-name">Name 2</div>
-      <div id="player-two-name-popup" class="player-popup">
-        <form id="player-two-form">
-          <input type="text" name="player-two-name-field" id="player-two-name-field" size="10">
-          <input type="submit" value="Save">
-        </form>
+      <div class="player">
+        <div id="player-one-name" class="player-name">Name 1</div>
+        <div id="player-one-name-popup" class="player-popup">
+          <form id="player-one-form">
+            <input
+              type="text"
+              name="player-one-name-field"
+              id="player-one-name-field"
+              size="10"
+            />
+            <input type="submit" value="Save" />
+          </form>
+        </div>
+        <div class="mark">X</div>
       </div>
-      <div class="mark">O</div>
+
+      <div class="inner-main">
+        <div class="tile"></div>
+        <div class="tile"></div>
+        <div class="tile"></div>
+        <div class="tile"></div>
+        <div class="tile"></div>
+        <div class="tile"></div>
+        <div class="tile"></div>
+        <div class="tile"></div>
+        <div class="tile"></div>
+      </div>
+
+      <div class="player">
+        <div id="player-two-name" class="player-name">Name 2</div>
+        <div id="player-two-name-popup" class="player-popup">
+          <form id="player-two-form">
+            <input
+              type="text"
+              name="player-two-name-field"
+              id="player-two-name-field"
+              size="10"
+            />
+            <input type="submit" value="Save" />
+          </form>
+        </div>
+        <div class="mark">O</div>
+      </div>
     </div>
-  
-  </div>
-</body>
+    <div class="hidden" id="winner-modal">
+      <div class="winner-modal-box"></div>
+    </div>
+  </body>
 </html>

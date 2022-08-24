@@ -1,7 +1,7 @@
 * {
   margin: 0;
   padding: 0;
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
   user-select: none;
 }
 
@@ -80,4 +80,27 @@ body {
 
 .hidden {
   display: none;
+}
+
+#winner-modal {
+  width: 100vw;
+  height: 100vh;
+  position: absolute;
+  background-color: rgba(169, 169, 169, 0.205);
+}
+
+.winner-modal-box {
+  width: 560px;
+  height: 360px;
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: whitesmoke;
+  border: 1px solid grey;
+  font-size: 48px;
 }
