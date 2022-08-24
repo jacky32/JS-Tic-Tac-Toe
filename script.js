@@ -61,11 +61,7 @@ const gameBoard = (() => {
   };
 
   const check = (row, column) => {
-    if (board[row][column] == "") {
-      return true;
-    } else {
-      return false;
-    }
+    return board[row][column] == "";
   };
 
   return { change, reset, check, board };
@@ -200,30 +196,24 @@ const displayController = (() => {
       gameController.changeTile(tiles[i], i)
     );
   }
-  const toggleWinnerModal = () => {
-    winnerModal.classList.toggle("hidden");
-  };
+
+  const toggleWinnerModal = () => winnerModal.classList.toggle("hidden");
 
   const showWinnerModal = (winner) => {
     toggleWinnerModal();
     winnerModal.children[0].innerText = `${winner.getName()} has won! Continue?`;
   };
 
-  const changeNamePopup = (player) => {
+  const changeNamePopup = (player) =>
     document.getElementById(player).classList.toggle("hidden");
-  };
 
-  const changePlayerName = (player, newName) => {
-    player.innerText = newName;
-  };
+  const changePlayerName = (player, newName) => (player.innerText = newName);
 
-  const draw = (tile, mark) => {
-    tile.innerHTML = mark;
-  };
+  const draw = (tile, mark) => (tile.innerHTML = mark);
 
   const clear = () => {
-    for (let i = 0; i < tiles.length; i++) {
-      tiles[i].innerHTML = "";
+    for (let tile of tiles) {
+      tile.innerHTML = "";
     }
   };
 
