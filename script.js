@@ -186,11 +186,13 @@ const displayController = (() => {
   document.getElementById("player-one-form").addEventListener("submit", (e) => {
     const name = document.getElementById("player-one-name-field");
     gameController.validateNewName(e, playerOne, name);
+    changeNamePopup("player-one-name-popup");
   });
 
   document.getElementById("player-two-form").addEventListener("submit", (e) => {
     const name = document.getElementById("player-two-name-field");
     gameController.validateNewName(e, playerTwo, name);
+    changeNamePopup("player-two-name-popup");
   });
 
   for (let i = 0; i < tiles.length; i++) {
